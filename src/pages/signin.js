@@ -43,11 +43,13 @@ function SignIn() {
             <Form.Input
               type="email"
               placeholder="Email address"
+              value={emailAddress}
               onChange={({ target }) => setEmailAddress(target.value)}
             />
             <Form.Input
               type="password"
               placeholder="Password"
+              value={password}
               onChange={({ target }) => setPassword(target.value)}
             />
             <Form.Submit disabled={isInvalid}>Submit</Form.Submit>
