@@ -14,4 +14,37 @@ I used compound components (just a design pattern) to build my components, and t
 ![image](https://github.com/prashanthwagle/netflix-react-clone/blob/master/screenshots/nc2.png)
 ![image](https://github.com/prashanthwagle/netflix-react-clone/blob/master/screenshots/nc3.png)
 
+# How to Run?
+
+1. Clone the repository and navigate to the repository. (cd netflix-react-clone)
+2. Install the dependencies (npm install)
+3. Create a new folder 'lib' inside 'src'. (mkdir src/lib)
+4. Create a file firebase.prod.js inside lib and fill in the following structure
+
+```
+import Firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+
+const config = {
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
+};
+
+const firebase = Firebase.initializeApp(config);
+
+export { firebase };
+
+```
+
+5. Create a firebase project and get the project-credentials and fill them in the config object.
+6. Start the prokect (npm start)
+7. Enjoy!
+
 ##### More Coming Soon. Currently in Development
