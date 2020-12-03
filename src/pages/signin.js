@@ -17,7 +17,6 @@ function SignIn() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("FB", firebase);
     return firebase
       .auth()
       .signInWithEmailAndPassword(emailAddress, password)
@@ -27,6 +26,7 @@ function SignIn() {
       .catch((error) => {
         setEmailAddress("");
         setPassword("");
+        console.log(error);
         setError(error.message);
       });
   };
