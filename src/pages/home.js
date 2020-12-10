@@ -4,7 +4,7 @@ import { FooterContainer } from "../containers/footer";
 import { FaqsContainer } from "../containers/accordion";
 import { HeaderContainer } from "../containers/header";
 import { OptForm, Feature } from "../components";
-
+import { Header } from "../components";
 function Home() {
   return (
     <>
