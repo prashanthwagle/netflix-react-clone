@@ -8,11 +8,10 @@ I have built the following pages within this application: sign in, sign up, brow
 
 I used compound components (just a design pattern) to build my components, and there's over 10 examples as to how these are used. The styling is all handled via styled components. Using compound components made my actual dumb components really easy to test. Used indexing and treeshaking for proper organization of files which implies better maintainability and readability.
 
-# Screenshots
+# Demo
 
-![image](https://github.com/prashanthwagle/netflix-react-clone/blob/master/screenshots/nc1.png)
-![image](https://github.com/prashanthwagle/netflix-react-clone/blob/master/screenshots/nc2.png)
-![image](https://github.com/prashanthwagle/netflix-react-clone/blob/master/screenshots/nc3.png)
+![image](https://github.com/prashanthwagle/netflix-react-clone/blob/master/screenshots/Netflix%20Clone.gif)
+
 
 # How to Run?
 
