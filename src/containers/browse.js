@@ -1,35 +1,50 @@
-import React, { useContext, useState, useEffect } from "react";
-import SelectProfileContainer from "./profiles";
-import { FirebaseContext } from "../context/firebase";
-import { Loading, Header, Card, Player } from "../components";
-import logo from "../logo.svg";
+import React, { useState, useEffect, useContext } from "react";
+import Fuse from "fuse.js";
+import { Card, Header, Loading, Player } from "../components";
 import * as ROUTES from "../constants/routes";
+import logo from "../logo.svg";
+import { FirebaseContext } from "../context/firebase";
+import SelectProfileContainer from "./profiles";
 import { FooterContainer } from "./footer";
 
 export function BrowseContainer({ slides }) {
+  const [category, setCategory] = useState("series");
   const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(true);
-  const [category, setCategory] = useState("series");
-  const { firebase } = useContext(FirebaseContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [slideRows, setSlideRows] = useState([]);
 
+  const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
 
-  console.log(user);
-
   useEffect(() => {
-    setTimeout(() => setLoading(false), 3000);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   }, [profile.displayName]);
 
   useEffect(() => {
     setSlideRows(slides[category]);
   }, [slides, category]);
 
+  useEffect(() => {
+    const fuse = new Fuse(slideRows, {
+      keys: ["data.description", "data.title", "data.genre"],
+    });
+    const results = fuse.search(searchTerm).map(({ item }) => item);
+
+    if (slideRows.length > 0 && searchTerm.length > 3 && results.length > 0) {
+      setSlideRows(results);
+    } else {
+      setSlideRows(slides[category]);
+    }
+  }, [searchTerm]);
+
   return profile.displayName ? (
     <>
       {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
-      <Header src="joker1">
+
+      <Header src="joker1" dontShowOnSmallViewPort>
         <Header.Frame>
           <Header.Group>
             <Header.Logo to={ROUTES.HOME} src={logo} alt="Netflix" />
@@ -69,14 +84,15 @@ export function BrowseContainer({ slides }) {
         </Header.Frame>
 
         <Header.Feature>
-          <Header.FeatureCallOut>Watch Joker now</Header.FeatureCallOut>
+          <Header.FeatureCallOut>Watch Joker Now</Header.FeatureCallOut>
           <Header.Text>
-            Arthur suffers from a medical disorder that causes him to laugh at
-            inappropriate times, depending on social services for medication.
-            After a gang of delinquents attacks Arthur in an alley, his
-            co-worker Randall gives him a gun for protection.
+            Forever alone in a crowd, failed comedian Arthur Fleck seeks
+            connection as he walks the streets of Gotham City. Arthur wears two
+            masks -- the one he paints for his day job as a clown, and the guise
+            he projects in a futile attempt to feel like he's part of the world
+            around him.
           </Header.Text>
-          <Header.PlayButton>Watch</Header.PlayButton>
+          <Header.PlayButton>Play</Header.PlayButton>
         </Header.Feature>
       </Header>
 
